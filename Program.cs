@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-
+            int[] arr = {1,2,3,4,5};
+            var sol = new Solution();
+            TreeNode bst =  sol.SortedArrayToBST(arr);
         }
     }
 
@@ -25,7 +27,20 @@
     {
         public TreeNode SortedArrayToBST(int[] nums)
         {
+            return SortBST(nums, 0, nums.Length);
+        }
+        public TreeNode SortBST(int[] nums, int left, int right)
+        {
+            
+            if (left > right)
+                return null;
+            int mid = left + (right - left)/2;
 
+            var node = new TreeNode(nums[mid]);
+
+            node.left = SortBST(nums, left, mid - 1);
+            node.right = SortBST(nums,mid+1, right);
+            return node;
         }
     }
 }
